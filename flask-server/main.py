@@ -12,7 +12,7 @@ SENSORES_INFO = {
     "sensor_5": {"N": 86, "P": 39, "K": 40, "rainfall": 12.0, "soil_moisture": 27.0, "organic_matter": 2.6, "label": "Silt"},
 }
 
-THINGSBOARD_URL = "http://<THINGSBOARD_DEVICE_ENDPOINT>"
+THINGSBOARD_URL = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
 
 # Estado actual de la predicción por sensor
 estado_modelo = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
