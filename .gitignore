@@ -1,0 +1,38 @@
+# Entornos virtuales de Python
+venv/
+ENV/
+env/
+.venv/
+
+# Archivos Python compilados
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Archivos temporales o de log
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Archivos de entorno
+.env
+.env.*
+
+# Configuración específica de IDEs/editors
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos de ejecución local
+.DS_Store
+Thumbs.db
+
+# Archivos de ngrok
+ngrok.log
+ngrok.yml
+
+# Archivos generados o descargables
+*.zip
+*.tar.gz
+README.txt
