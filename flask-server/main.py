@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 # Valores fijos por sensor
 SENSORES_INFO = {
-    "sensor_1": {"N": 90, "P": 40, "K": 40, "rainfall": 12.5, "soil_moisture": 25.0, "organic_matter": 2.5, "label": "Loam"},
-    "sensor_2": {"N": 85, "P": 38, "K": 42, "rainfall": 11.0, "soil_moisture": 28.0, "organic_matter": 2.1, "label": "Clay"},
-    "sensor_3": {"N": 88, "P": 41, "K": 39, "rainfall": 10.5, "soil_moisture": 26.5, "organic_matter": 2.3, "label": "Sand"},
-    "sensor_4": {"N": 92, "P": 43, "K": 37, "rainfall": 13.0, "soil_moisture": 29.0, "organic_matter": 2.7, "label": "Loam"},
-    "sensor_5": {"N": 86, "P": 39, "K": 40, "rainfall": 12.0, "soil_moisture": 27.0, "organic_matter": 2.6, "label": "Silt"},
+    "sensor_1": {"N": 90, "P": 40, "K": 40, "rainfall": 12.5, "organic_matter": 2.5, "label": "Loam"},
+    "sensor_2": {"N": 85, "P": 38, "K": 42, "rainfall": 11.0, "organic_matter": 2.1, "label": "Clay"},
+    "sensor_3": {"N": 88, "P": 41, "K": 39, "rainfall": 10.5, "organic_matter": 2.3, "label": "Sand"},
+    "sensor_4": {"N": 92, "P": 43, "K": 37, "rainfall": 13.0, "organic_matter": 2.7, "label": "Loam"},
+    "sensor_5": {"N": 86, "P": 39, "K": 40, "rainfall": 12.0, "organic_matter": 2.6, "label": "Silt"},
 }
 
 THINGSBOARD_URL = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
@@ -36,6 +36,7 @@ def procesar_datos():
     info = SENSORES_INFO[sensor_id]
     temperature = data.get("temperature")
     humidity = data.get("humidity")
+    soil = data.get("soil_moisture", 0)
     alerta = data.get("alerta_humedad", 0)
 
     # Lógica de control de predicción
@@ -49,7 +50,7 @@ def procesar_datos():
             humidity=humidity,
             rainfall=info["rainfall"],
             label=info["label"],
-            soil_moisture=info["soil_moisture"],
+            soil_moisture=soil,
             organic_matter=info["organic_matter"]
         )
         estado_modelo[sensor_id] = eficiencia
