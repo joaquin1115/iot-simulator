@@ -12,14 +12,14 @@ SENSORES_INFO = {
     "sensor_5": {"N": 86, "P": 39, "K": 40, "rainfall": 12.0, "organic_matter": 2.6, "label": "Silt"},
 }
 
-THINGSBOARD_URL1 = "http://demo.thingsboard.io/api/v1/09liec8fz5s3jkh2fqnx/telemetry"
-THINGSBOARD_URL2 = "http://demo.thingsboard.io/api/v1/3fiqeu0996trifoyeoys/telemetry"
-THINGSBOARD_URL3 = "http://demo.thingsboard.io/api/v1/sd3vuk7rhcsqej0a3365/telemetry"
-THINGSBOARD_URL4 = "http://demo.thingsboard.io/api/v1/jcshuayijv2pshl1grjr/telemetry"
-THINGSBOARD_URL5 = "http://demo.thingsboard.io/api/v1/2qp07gel05og37bg572p/telemetry"
+THINGSBOARD_URL1 = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
+THINGSBOARD_URL2 = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
+THINGSBOARD_URL3 = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
+THINGSBOARD_URL4 = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
+THINGSBOARD_URL5 = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
 
 # Para la capacidad de agua
-THINGSBOARD_URL6 = "http://demo.thingsboard.io/api/v1/iw94hxtgdizta9u4owbd/telemetry"
+THINGSBOARD_URL6 = "http://demo.thingsboard.io/api/v1/<ACCESS_TOKEN>/telemetry"
 
 
 url_map = {
