@@ -41,6 +41,7 @@ while True:
       sensores[i].measure()
       temp = round(random.uniform(22.0 + i, 30.0 + i), 1)
       hum = round(random.uniform(15.0 + i, 55.0 - i), 1)
+      soil = round(random.uniform(15.0 + i, 55.0 - i), 1)
       alerta = 1 if hum < UMBRAL_HUMEDAD else 0
       leds[i].value(alerta)
 
@@ -48,6 +49,7 @@ while True:
         "sensor_id": f"sensor_{i+1}",
         "temperature": temp,
         "humidity": hum,
+        "soil_moisture": soil,
         "alerta_humedad": alerta,
         "lat": ubicaciones[i][0],
         "lng": ubicaciones[i][1]
