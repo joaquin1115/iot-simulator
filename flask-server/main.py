@@ -109,7 +109,7 @@ def procesar_datos():
     response = requests.post(url, json=resultado, headers=headers)
     responseCap = requests.post(THINGSBOARD_URL6, json=capacidad_tanque, headers=headers)
     print(f"🔁 Código de respuesta ThingsBoard: {response.status_code}")
-    print(f"🔁 Código de respuesta ThingsBoard: {rresponseCap.status_code}")
+    print(f"🔁 Código de respuesta ThingsBoard: {responseCap.status_code}")
 
     return jsonify({
         "enviado_a_thingsboard": response.status_code,
