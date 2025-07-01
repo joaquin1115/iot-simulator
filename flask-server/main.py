@@ -21,6 +21,7 @@ THINGSBOARD_URL5 = "http://demo.thingsboard.io/api/v1/2qp07gel05og37bg572p/telem
 # Para la capacidad de agua
 THINGSBOARD_URL6 = "http://demo.thingsboard.io/api/v1/iw94hxtgdizta9u4owbd/telemetry"
 
+
 url_map = {
     "sensor_1": THINGSBOARD_URL1,
     "sensor_2": THINGSBOARD_URL2,
@@ -45,6 +46,8 @@ def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label, so
 
 @app.route("/procesar_datos", methods=["POST"])
 def procesar_datos():
+    global tanque_agua
+
     data = request.json
     sensor_id = data.get("sensor_id")
     print(f"📥 Recibido de Wokwi: {data}")
@@ -57,6 +60,8 @@ def procesar_datos():
     humidity = data.get("humidity")
     soil = data.get("soil_moisture", 0)
     alerta = data.get("alerta_humedad", 0)
+
+    alerta_anterior = estado_alerta_anterior.get(sensor_id, 0)
 
     # Lógica de control de predicción
     if alerta == 1:
@@ -73,14 +78,12 @@ def procesar_datos():
             organic_matter=info["organic_matter"]
         )
         estado_modelo[sensor_id] = eficiencia
-        
     elif alerta_anterior == 1 and alerta == 0:
         eficiencia = estado_modelo.get(sensor_id, 0.0)
         # Se modifica aqui por tamaño de parcela
         tanque_agua = max(0.0, tanque_agua - eficiencia)
         print(f"Descontado {eficiencia} L del tanque. Restante: {tanque_agua:.2f} L")
         estado_modelo[sensor_id] = 0.0
-        
     elif alerta == 0:
         estado_modelo[sensor_id] = 0.0
 
@@ -94,20 +97,19 @@ def procesar_datos():
     capacidad_tanque = {
         "tank_remaining_liters": tanque_agua
     }
-    
+
     # Enviar a ThingsBoard
     headers = {
         "Content-Type": "application/json"
     }
-    
+
     url = url_map.get(sensor_id)
 
-
     print(f"📤 Enviando a ThingsBoard: {resultado}")
-    response = requests.post(THINGSBOARD_URL, json=resultado, headers=headers)
-    print(f"🔁 Código de respuesta ThingsBoard: {response.status_code}")
+    response = requests.post(url, json=resultado, headers=headers)
     responseCap = requests.post(THINGSBOARD_URL6, json=capacidad_tanque, headers=headers)
-    print(f"🔁 Código de respuesta ThingsBoard: {responseCap.status_code}")
+    print(f"🔁 Código de respuesta ThingsBoard: {response.status_code}")
+    print(f"🔁 Código de respuesta ThingsBoard: {rresponseCap.status_code}")
 
     return jsonify({
         "enviado_a_thingsboard": response.status_code,
