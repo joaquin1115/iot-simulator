@@ -64,7 +64,7 @@ def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label_str
     
     print(f"Predicción: {prediction[0]:.4f}")
 
-    return nn.predict(input_scaled)[0]
+    return float(nn.predict(input_scaled)[0])
 
 @app.route("/procesar_datos", methods=["POST"])
 def procesar_datos():
