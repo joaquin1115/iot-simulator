@@ -41,9 +41,9 @@ estado_modelo = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
 
 estado_alerta_anterior = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
 
-def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label, soil_moisture, organic_matter):
-
-    
+def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label_str, soil_moisture, organic_matter):
+    # Codificar la etiqueta en texto (ej: 'papaya') usando el encoder cargado
+    label_encoded = label_encoder.transform([label_str])[0]
     
     # Ejemplo de entrada
     input_data = pd.DataFrame([{
@@ -53,7 +53,7 @@ def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label, so
         'temperature': temperature,
         'humidity': humidity,
         'rainfall': rainfall,
-        'label': label,  # Asegúrate de usar el mismo encoding que usaste en entrenamiento
+        'label': label_encoded,  # Asegúrate de usar el mismo encoding que usaste en entrenamiento
         'soil_moisture': soil_moisture,
         'organic_matter': organic_matter
     }])
@@ -142,5 +142,6 @@ if __name__ == "__main__":
     # Cargar modelo y scaler
     nn = joblib.load('modelo_red_neuronal.pkl')
     scaler = joblib.load('escalador.pkl')
+    label_encoder = joblib.load('label_encoder.pkl')
     
     app.run(port=5000)
