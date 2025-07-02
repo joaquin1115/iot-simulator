@@ -41,9 +41,9 @@ estado_modelo = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
 
 estado_alerta_anterior = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
 
-def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label_str, soil_moisture, organic_matter):
+def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label, soil_moisture, organic_matter):
     # Codificar la etiqueta en texto (ej: 'papaya') usando el encoder cargado
-    label_encoded = label_encoder.transform([label_str])[0]
+    label_encoded = label_encoder.transform([label])[0]
     
     # Ejemplo de entrada
     input_data = pd.DataFrame([{
