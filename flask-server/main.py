@@ -1,5 +1,9 @@
 from flask import Flask, request, jsonify
 import requests
+import joblib
+import numpy as np
+import pandas as pd
+
 
 app = Flask(__name__)
 
@@ -38,11 +42,29 @@ estado_modelo = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
 estado_alerta_anterior = {sensor_id: 0.0 for sensor_id in SENSORES_INFO}
 
 def predecir_eficiencia_agua(N, P, K, temperature, humidity, rainfall, label, soil_moisture, organic_matter):
-    """
-    Función de predicción temporal para water_usage_efficiency.
-    Retorna un valor fijo (4.5), solo llamada cuando alerta_humedad == 1.
-    """
-    return 4.5
+
+    
+    
+    # Ejemplo de entrada
+    input_data = pd.DataFrame([{
+        'N': N,
+        'P': P,
+        'K': K,
+        'temperature': temperature,
+        'humidity': humidity,
+        'rainfall': rainfall,
+        'label': label,  # Asegúrate de usar el mismo encoding que usaste en entrenamiento
+        'soil_moisture': soil_moisture,
+        'organic_matter': organic_matter
+    }])
+    
+    # Escalar y predecir
+    input_scaled = scaler.transform(input_data)
+    prediction = nn.predict(input_scaled)
+    
+    print(f"Predicción: {prediction[0]:.4f}")
+
+    return nn.predict(input_scaled)[0]
 
 @app.route("/procesar_datos", methods=["POST"])
 def procesar_datos():
@@ -117,4 +139,8 @@ def procesar_datos():
     })
 
 if __name__ == "__main__":
+    # Cargar modelo y scaler
+    nn = joblib.load('modelo_red_neuronal.pkl')
+    scaler = joblib.load('escalador.pkl')
+    
     app.run(port=5000)
