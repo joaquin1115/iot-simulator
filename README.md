@@ -174,6 +174,8 @@ Una vez en ThingsBoard. Ingresas a la sección dashboards, haces click a "Add Da
 
 Verfique que todos los widgets esten relacionados a un dispositivo.
 
+En caso que los widgets aparezcan muy grande, modifique el zoom del navegador para que se pueda ajustar la resolución requerida.
+
 ---
 
 ## 🧾 Licencia
