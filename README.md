@@ -23,6 +23,7 @@ Este proyecto simula una red de sensores DHT22 en [Wokwi](https://wokwi.com/) qu
 ```bash
 cd flask-server
 python -m venv venv
+pip install -r requirements.txt
 source venv/bin/activate  # En Windows: venv\Scripts\activate
 ```
 
@@ -116,7 +117,7 @@ Ejemplo:
 THINGSBOARD_URL = "http://demo.thingsboard.io/api/v1/h2kq7d5uz48s8n34r012/telemetry"
 ```
 
-Donde `h2kq7d5uz48s8n34r012` es el token del dispositivo en ThingsBoard.
+Donde `h2kq7d5uz48s8n34r012` es el token del dispositivo en ThingsBoard. Para este proyecto se usaron seis dispositivos.
 
 ---
 
@@ -125,7 +126,7 @@ Donde `h2kq7d5uz48s8n34r012` es el token del dispositivo en ThingsBoard.
 1. Entra a [https://demo.thingsboard.io](https://demo.thingsboard.io).
 2. Inicia sesión.
 3. Ve a **Entidades > Dispositivos > + Agregar nuevo dispositivo**.
-4. Asigna un nombre como `sensor_virtual_1`, deja los demás campos por defecto.
+4. Asigna un nombre como `sensodanper_1`, deja los demás campos por defecto. Estos para los 6 dispositivos.
 5. Haz clic en **"Siguiente: Credenciales"**.
 6. Copia el token en la pestaña **"Access token"**.
 7. Sustitúyelo en `THINGSBOARD_URL` dentro de `main.py`.
@@ -165,6 +166,30 @@ Envío vía HTTP POST
    ↓
 ThingsBoard (telemetría en dashboard)
 ```
+
+
+## ✅ Flujo de datos
+
+```
+Wokwi (main.py)
+   ↓
+SERVER_URL = http://<ngrok_url>/procesar_datos
+   ↓
+Servidor Flask (main.py)
+   ↓
+Procesamiento
+   ↓
+Envío vía HTTP POST
+   ↓
+ThingsBoard (telemetría en dashboard)
+```
+
+---
+## ✅ Configurar Panel
+
+Una vez en ThingsBoard. Ingresas a la sección dashboards, haces click a "Add Dashboards" e importar "menu.json" lo cual lo encuentras en seción principal del Github.
+
+Verfique que todos los widgets esten relacionados a un dispositivo.
 
 ---
 
