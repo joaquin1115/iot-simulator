@@ -167,23 +167,6 @@ Envío vía HTTP POST
 ThingsBoard (telemetría en dashboard)
 ```
 
-
-## ✅ Flujo de datos
-
-```
-Wokwi (main.py)
-   ↓
-SERVER_URL = http://<ngrok_url>/procesar_datos
-   ↓
-Servidor Flask (main.py)
-   ↓
-Procesamiento
-   ↓
-Envío vía HTTP POST
-   ↓
-ThingsBoard (telemetría en dashboard)
-```
-
 ---
 ## ✅ Configurar Panel
 
