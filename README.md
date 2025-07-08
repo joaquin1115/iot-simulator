@@ -126,7 +126,7 @@ Donde `h2kq7d5uz48s8n34r012` es el token del dispositivo en ThingsBoard. Para es
 1. Entra a [https://demo.thingsboard.io](https://demo.thingsboard.io).
 2. Inicia sesión.
 3. Ve a **Entidades > Dispositivos > + Agregar nuevo dispositivo**.
-4. Asigna un nombre como `sensodanper_1`, deja los demás campos por defecto. Estos para los 6 dispositivos.
+4. Asigna un nombre como `sensordanper_1`, deja los demás campos por defecto. Estos para los 6 dispositivos, es decir, hasta `sensordanper_6`.
 5. Haz clic en **"Siguiente: Credenciales"**.
 6. Copia el token en la pestaña **"Access token"**.
 7. Sustitúyelo en `THINGSBOARD_URL` dentro de `main.py`.
